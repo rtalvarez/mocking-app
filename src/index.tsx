@@ -1,4 +1,4 @@
-import { SetupWorkerApi } from 'msw';
+// import { SetupWorkerApi } from 'msw';
 import React from 'react';
 import { render } from 'react-dom';
 import './index.css';
@@ -7,13 +7,12 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-if (process.env.NODE_ENV === 'development') {
-  // eslint-disable-next-line
-  const { worker } = require('./mocks/browser') as { worker: SetupWorkerApi };
+// if (process.env.NODE_ENV === 'development') {
+//   // eslint-disable-next-line
+//   const { worker }: { worker: SetupWorkerApi } = require('./mocks/browser');
 
-  console.log('start worker');
-  void worker.start();
-}
+//   void worker.start();
+// }
 
 const queryClient = new QueryClient({
   defaultOptions: {

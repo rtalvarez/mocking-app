@@ -7,7 +7,6 @@ export const LoginPage: React.FC = () => {
   const { mutate } = useLoginMutate();
 
   function onClick() {
-    console.log('login');
     mutate();
   }
 
