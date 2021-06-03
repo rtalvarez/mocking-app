@@ -1,30 +1,15 @@
 import React from 'react';
 
+import { LoginPage, UserPage } from './components';
 import { useLogin } from './hooks/useLogin';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const login = useLogin();
+  const { data: isAuthenticated, isLoading } = useLogin();
 
-  console.log('login', login);
+  console.log('login', isAuthenticated, isLoading);
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img alt="logo" className="App-logo" src={logo} />
-        <p>trash</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return isAuthenticated ? <UserPage /> : <LoginPage />;
 }
 
 export default App;

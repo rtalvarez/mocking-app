@@ -1,22 +1,25 @@
 import { rest } from 'msw';
 
+import { delayedResponse } from './res/delayedResponse';
+
 export const handlers = [
-  rest.get('/login', (req, res, ctx) => {
-    return res(
+  rest.get('/api/login', (req, res, ctx) => {
+    return delayedResponse(
       ctx.status(200),
-      ctx.json({ authenticated: sessionStorage.getItem('is-authenticated') }),
+      ctx.json({ authenticated: Boolean(sessionStorage.getItem('is-authenticated')) }),
     );
   }),
-  rest.post('/login', (req, res, ctx) => {
+  rest.post('/api/login', (req, res, ctx) => {
     // Persist user's authentication in the session
     sessionStorage.setItem('is-authenticated', 'true');
 
-    return res(
+    return delayedResponse(
       // Respond with a 200 status code
       ctx.status(200),
+      ctx.json({ authenticated: Boolean(sessionStorage.getItem('is-authenticated')) }),
     );
   }),
-  rest.get('/user', (req, res, ctx) => {
+  rest.get('/api/user', (req, res, ctx) => {
     // Check if the user is authenticated in this session
     const isAuthenticated = sessionStorage.getItem('is-authenticated');
 
