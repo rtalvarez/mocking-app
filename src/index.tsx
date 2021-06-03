@@ -1,8 +1,9 @@
 import { SetupWorkerApi } from 'msw';
 import React from 'react';
 import { render } from 'react-dom';
-
 import './index.css';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -10,12 +11,24 @@ if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line
   const { worker } = require('./mocks/browser') as { worker: SetupWorkerApi };
 
+  console.log('start worker');
   void worker.start();
 }
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+  },
+});
+
 render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
