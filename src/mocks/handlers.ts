@@ -9,6 +9,14 @@ export const handlers = [
       ctx.json({ authenticated: Boolean(sessionStorage.getItem('is-authenticated')) }),
     );
   }),
+  rest.delete('/api/login', (req, res, ctx) => {
+    sessionStorage.removeItem('is-authenticated');
+
+    return delayedResponse(
+      ctx.status(200),
+      ctx.json({ authenticated: Boolean(sessionStorage.getItem('is-authenticated')) }),
+    );
+  }),
   rest.post('/api/login', (req, res, ctx) => {
     // Persist user's authentication in the session
     sessionStorage.setItem('is-authenticated', 'true');
