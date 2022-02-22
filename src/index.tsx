@@ -1,4 +1,3 @@
-import { SetupWorkerApi } from 'msw';
 import React from 'react';
 import { render } from 'react-dom';
 import './index.css';
@@ -9,9 +8,7 @@ import reportWebVitals from './reportWebVitals';
 
 if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line
-  const { worker }: { worker: SetupWorkerApi } = require('./mocks/browser');
-
-  void worker.start();
+  require('./mocks/browser');
 }
 
 const queryClient = new QueryClient({
