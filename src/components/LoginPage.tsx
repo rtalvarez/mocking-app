@@ -3,6 +3,8 @@ import React from 'react';
 
 import { useLoginMutate } from '../hooks';
 
+import { SampleForm } from './SampleForm';
+
 export const LoginPage: React.FC = () => {
   const { mutate } = useLoginMutate();
 
@@ -18,6 +20,7 @@ export const LoginPage: React.FC = () => {
           It looks like you are not logged in. Please login in order to access your user profile.
         </Text>
       </Panel>
+      <SampleForm />
     </>
   );
 };
